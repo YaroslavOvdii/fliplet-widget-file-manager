@@ -68,7 +68,8 @@ function getOrganizationsList() {
   }).then(function() {
     getAppsList();
     $selectAllCheckbox.addClass('active');
-  }).finally(function () {
+    showSpinner(false);
+  }).catch(function () {
     showSpinner(false);
   });
 }
@@ -149,7 +150,8 @@ function getAppsList() {
     apps.forEach(addApps);
 
     navigateToDefaultFolder();
-  }).finally(function () {
+    showSpinner(false);
+  }).catch(function () {
     showSpinner(false);
   });
 }
@@ -243,7 +245,9 @@ function getFolderContentsById(id, type, isSearchNav) {
     }
   }, function() {
     $('.empty-state').addClass('active');
-  }).finally(function () {
+  }).then(function () {
+    showSpinner(false);
+  }).catch(function () {
     showSpinner(false);
   });
 }
@@ -359,7 +363,9 @@ function getFolderContents(el, isRootFolder) {
     }
   }, function() {
     $('.empty-state').addClass('active');
-  }).finally(function () {
+  }).then(function () {
+    showSpinner(false);
+  }).catch(function () {
     showSpinner(false);
   });
 }
@@ -1183,7 +1189,8 @@ $('.file-manager-wrapper')
     Fliplet.Media.Folders.create(options).then(function (folder) {
       addFolder(folder);
       insertItem(folder, true);
-    }).finally(function () {
+      showSpinner(false);
+    }).catch(function () {
       showSpinner(false);
     });
 
@@ -1290,9 +1297,11 @@ $('.file-manager-wrapper')
           });
         }
 
-        deletePromise.finally(function () {
+        deletePromise.then(function () {
           showSpinner(false);
-        })
+        }).catch(function () {
+          showSpinner(false);
+        });
       });
     }
   })
@@ -1374,9 +1383,11 @@ $('.file-manager-wrapper')
         });
       }
 
-      updatePromise.finally(function () {
+      updatePromise.then(function () {
         showSpinner(false);
-      })
+      }).catch(function () {
+        showSpinner(false);
+      });
     }
   })
   .on('click', '.header-breadcrumbs [data-breadcrumb]', function() {
@@ -1410,11 +1421,12 @@ $('.file-manager-wrapper')
     showSpinner(true);
 
     search(type, term)
-      .catch(function () {
-        alert('Error on search files');
-      })
-      .finally(function () {
+      .then(function () {
         showSpinner(false);
+      })
+      .catch(function () {
+        showSpinner(false);
+        alert('Error on search files');
       });
 
   }, searchDebounceTime))
