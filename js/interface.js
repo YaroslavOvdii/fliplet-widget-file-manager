@@ -71,6 +71,9 @@ function getOrganizationsList() {
     showSpinner(false);
   }).catch(function () {
     showSpinner(false);
+    Fliplet.Modal.alert({
+      message: Fliplet.parseError(err)
+    })
   });
 }
 
@@ -153,6 +156,9 @@ function getAppsList() {
     showSpinner(false);
   }).catch(function () {
     showSpinner(false);
+    Fliplet.Modal.alert({
+      message: Fliplet.parseError(err)
+    })
   });
 }
 
@@ -249,6 +255,9 @@ function getFolderContentsById(id, type, isSearchNav) {
     showSpinner(false);
   }).catch(function () {
     showSpinner(false);
+    Fliplet.Modal.alert({
+      message: Fliplet.parseError(err)
+    })
   });
 }
 
@@ -367,6 +376,9 @@ function getFolderContents(el, isRootFolder) {
     showSpinner(false);
   }).catch(function () {
     showSpinner(false);
+    Fliplet.Modal.alert({
+      message: Fliplet.parseError(err)
+    })
   });
 }
 
@@ -1192,6 +1204,9 @@ $('.file-manager-wrapper')
       showSpinner(false);
     }).catch(function () {
       showSpinner(false);
+      Fliplet.Modal.alert({
+        message: Fliplet.parseError(err)
+      })
     });
 
     $newBtn.click();
@@ -1301,6 +1316,9 @@ $('.file-manager-wrapper')
           showSpinner(false);
         }).catch(function () {
           showSpinner(false);
+          Fliplet.Modal.alert({
+            message: Fliplet.parseError(err)
+          })
         });
       });
     }
@@ -1385,8 +1403,11 @@ $('.file-manager-wrapper')
 
       updatePromise.then(function () {
         showSpinner(false);
-      }).catch(function () {
+      }).catch(function (err) {
         showSpinner(false);
+        Fliplet.Modal.alert({
+          message: Fliplet.parseError(err)
+        })
       });
     }
   })
